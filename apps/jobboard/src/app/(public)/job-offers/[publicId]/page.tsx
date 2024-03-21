@@ -28,11 +28,7 @@ export default async function JobOfferPage({ params }: Params) {
   return (
     <div>
       <Header>Job Offer</Header>
-      <div className="mb-6">
-        <Link href="/job-offers" className="underline text-blue-600">
-          Back to list
-        </Link>
-      </div>
+      <Link href="/job-offers">Back to list</Link>
       <div key={offer.public_id} className="my-4">
         <h2 className="font-bold text-2xl">{offer.title}</h2>
         <p>{offer.description}</p>

@@ -1,0 +1,9 @@
+npx nx storybook common-ui  // storybook common-ui
+terminal (bash) -> docker compose up -> 5434
+npx nx build jobboard
+
+NEXT 14
+
+
+
+

@@ -1,17 +1,7 @@
 import { JobOffer } from '@prisma/client';
 import db from '@jobboard/prisma-client';
-import { unstable_noStore as noStore } from 'next/cache';
 
-export const fetchJobOffers = async (query: string | null) => {
-  const whereQuery = query
-    ? {
-        title: {
-          contains: query,
-          mode: 'insensitive',
-        },
-      }
-    : {};
-
+export const fetchJobOffers = async () => {
   return db.jobOffer.findMany({
     select: {
       public_id: true,
@@ -19,21 +9,9 @@ export const fetchJobOffers = async (query: string | null) => {
       description: true,
       salary: true,
     },
-    where: whereQuery, // TODO: <-- Here we use the whereQuery
   });
 };
 
 export const fetchOffer = async (publicId: JobOffer['public_id']) => {
   return db.jobOffer.findUnique({ where: { public_id: publicId } });
-};
-
-const wait = async (ms: number) =>
-  setTimeout(() => {
-    return;
-  }, ms);
-
-export const fetchOffersCount = async () => {
-  await wait(5000);
-  // noStore(); -- omit data store
-  return db.jobOffer.count();
 };
